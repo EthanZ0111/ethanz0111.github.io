@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>Categories</title>
+<title>MongoDB mapreduce 调试</title>
 
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
@@ -29,11 +29,7 @@
 <script src="/js/table.js"></script>
 
 
-<style>
-  .toc{
-    display: none !important;
-  }
-</style>
+<script src="/js/toc.js"></script>
 
 
 <script>
@@ -80,14 +76,17 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
     
 </div><div ref="extraContainer" class="extra-container">
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
                 keyboard_arrow_up
             </i>
         </a>
-        
-        
         
     </div>
 </div><div class="single-column-drawer-container" ref="drawer"
@@ -96,6 +95,11 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
         <div class="drawer-menu">
             
             
+            
+            <div class="toc">
+
+
+</div>
             
         </div>
     </div>
@@ -127,27 +131,101 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
             <div id="content">
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        <a class="a-block">
-            <div class="post-item-wrapper post-item-wrapper-no-hover">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title post-item-title-small">
-                            Categories
-                        </div>
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('/')">
+                <div class="post-title">
+                    MongoDB mapreduce 调试
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2017-06-16 00:00
+                        </time>
+                        
+
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/mongodb">MongoDB</a>
+                                &nbsp;
+                            
+                        
                     </div>
                 </div>
             </div>
-        </a>
-        
-        
-    </div>
-</div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <p>#MongoDB
+相关函数用与调试方法。</p>
+<pre><code>var c = db.UIDs.findOne()
+
+var m = function(){
+	 print(this)
+	this.DS.forEach(function(z){
+		print(z.D,z.C);
+		emit(z.D,z.C);
+	});
+}
+
+var emit = function(key, value) {
+	print(&quot;emit&quot;);
+	print(&quot;key: &quot; + key + &quot; value: &quot; + tojson(value));
+}
+
+m.apply(c)//调试
+
+var r = function(key,values){return Array.sum(values);}
+
+db.UIDs.mapReduce(m,r,{limit:1000,out:&quot;null&quot;}).find()
+</code></pre><p>引用自：</p>
+<p><a href="http://www.cnblogs.com/yuechaotian/archive/2013/02/26/2933455.html">跟踪调试</a></p>
+<p><a href="http://blog.csdn.net/guoqianqian5812/article/details/52785557"> MongoDB mapReduce使用 </a></p>
+<p><a href="http://blog.csdn.net/qqiabc521/article/details/6330783"> MongoDB mapReduce使用 </a></p>
+
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2017-06-16</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/post/2017-06-01-kafka-offset-monitor/">
+                    Previous<br>kafka 监控
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
 
 
             </div>
+        </div>
+    </div>
+</div>
 
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 &lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>

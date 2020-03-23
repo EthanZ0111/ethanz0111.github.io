@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html><head>
+<title>多种代理服务理解</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="/scss/journal.min.e24eaf7258cd3904fb5e711d29b8f80978e7b6fe0c6096c8c529c0c3b28d3fda.css" integrity="sha256-4k6vcljNOQT7XnEdKbj4CXjntv4MYJbIxSnAw7KNP9o=" media="screen">
+
+<script src="/js/loadCSS.js"></script>
+<script src="/js/table.js"></script>
+
+
+<script src="/js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="">
+    
+        <div class="nav-title">
+            My New Hugo Site
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+&lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+-->
+
+&copy;
+	
+	2017 My New Hugo Site
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e7%90%86%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%b1%bb%e5%9e%8b" v-on:click="closeDrawer" id="代理服务器类型-nav">
+										 代理服务器类型
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%ad%a3%e5%90%91%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="正向代理-nav">
+										 正向代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e8%a1%a8" v-on:click="closeDrawer" id="代表-nav">
+										 代表：
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="反向代理-nav">
+										 反向代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e8%a1%a8-1" v-on:click="closeDrawer" id="代表-1-nav">
+										 代表：
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="透明代理-nav">
+										 透明代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8c%bf%e5%90%8d%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="匿名代理-nav">
+										 匿名代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e7%90%86%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%b1%bb%e5%9e%8b" v-on:click="closeDrawer" id="代理服务器类型-nav">
+										 代理服务器类型
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%ad%a3%e5%90%91%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="正向代理-nav">
+										 正向代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e8%a1%a8" v-on:click="closeDrawer" id="代表-nav">
+										 代表：
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="反向代理-nav">
+										 反向代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e8%a1%a8-1" v-on:click="closeDrawer" id="代表-1-nav">
+										 代表：
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="透明代理-nav">
+										 透明代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8c%bf%e5%90%8d%e4%bb%a3%e7%90%86" v-on:click="closeDrawer" id="匿名代理-nav">
+										 匿名代理
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="">
+            My New Hugo Site
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="">
+        <div class="single-column-header-title">My New Hugo Site</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('/')">
+                <div class="post-title">
+                    多种代理服务理解
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2017-03-24 00:00
+                        </time>
+                        
+
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8">代理服务器</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="代理服务器类型">代理服务器类型</h1>
+<p>代理服务器的个人总结。</p>
+<h2 id="正向代理">正向代理</h2>
+<p>你不想出门，让朋友帮你带一份麦当劳的巨无霸。
+你是客户端，你的朋友是正向代理服务器，麦当劳是目的服务器，巨无霸是目的资源。
+你不能直接去麦当劳买东西（客户端无法直接访问目的资源），告诉朋友你需要麦当劳的巨无霸（告诉代理服务器某个地址上的某个资源），让他带回来（代理代替客户端发出请求获取数据，并发给客户端）。
+有如下特点：</p>
+<ul>
+<li>访问本来无法访问的资源。</li>
+<li>资源加速（缓存与链路加速）。</li>
+<li>访问控制。</li>
+<li>隐藏真实客户端。</li>
+</ul>
+<h3 id="代表">代表：</h3>
+<p>squid，各种翻墙</p>
+<h2 id="反向代理">反向代理</h2>
+<p>打电话让室友帮你带午餐，室友会根据情况帮你带炒饭或者米粉。
+你是客户端，你的朋友是反向代理服务器，午餐是资源。你朋友能根据情况做出选择（反向代理策略），某家人少出餐快（负载均衡）；不能吃辣（访问控制）；饭店地址保密（保护真正的服务器）。</p>
+<h3 id="代表-1">代表：</h3>
+<p>nginx</p>
+<h2 id="透明代理">透明代理</h2>
+<p>行为管理设备大部分为透明代理。</p>
+<h2 id="匿名代理">匿名代理</h2>
+<p>加密的透明代理</p>
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2017-03-24</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="/post/2017-03-31-linux-shell-usage/">
+                    Next<br>Linux shell使用
+                </a>
+                
+                
+                
+                <a class="older-posts">
+                    Previous<br>No older posts.
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+&lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+-->
+
+&copy;
+	
+	2017 My New Hugo Site
+	
+</div>
+    	</div>
+    <script src="/js/journal.js"></script>
+    </body>
+</html>

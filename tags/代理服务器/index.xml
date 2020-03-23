@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>代理服务器 on My New Hugo Site</title>
+    <link>/tags/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <description>Recent content in 代理服务器 on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>多种代理服务理解</title>
+      <link>/post/2017-03-23-proxy-type/</link>
+      <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-23-proxy-type/</guid>
+      <description>&lt;h1 id=&#34;代理服务器类型&#34;&gt;代理服务器类型&lt;/h1&gt;
+&lt;p&gt;代理服务器的个人总结。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>Categories</title>
+<title>Java log4j2 配置相关</title>
 
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
@@ -29,11 +29,7 @@
 <script src="/js/table.js"></script>
 
 
-<style>
-  .toc{
-    display: none !important;
-  }
-</style>
+<script src="/js/toc.js"></script>
 
 
 <script>
@@ -80,14 +76,45 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
     
 </div><div ref="extraContainer" class="extra-container">
     
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#java%e6%96%b0%e6%97%a5%e5%bf%97%e7%b3%bb%e7%bb%9flog4j2%e9%85%8d%e7%bd%ae%e7%9b%b8%e5%85%b3" v-on:click="closeDrawer" id="java新日志系统log4j2配置相关-nav">
+										 java新日志系统log4j2配置相关
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
             <i class="material-icons pagination-action-icon">
                 keyboard_arrow_up
             </i>
         </a>
-        
-        
         
     </div>
 </div><div class="single-column-drawer-container" ref="drawer"
@@ -96,6 +123,39 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
         <div class="drawer-menu">
             
             
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#java%e6%96%b0%e6%97%a5%e5%bf%97%e7%b3%bb%e7%bb%9flog4j2%e9%85%8d%e7%bd%ae%e7%9b%b8%e5%85%b3" v-on:click="closeDrawer" id="java新日志系统log4j2配置相关-nav">
+										 java新日志系统log4j2配置相关
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
             
         </div>
     </div>
@@ -127,27 +187,88 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
             <div id="content">
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        <a class="a-block">
-            <div class="post-item-wrapper post-item-wrapper-no-hover">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title post-item-title-small">
-                            Categories
-                        </div>
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('/')">
+                <div class="post-title">
+                    Java log4j2 配置相关
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2017-05-05 00:00
+                        </time>
+                        
+
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/java">Java</a>
+                                &nbsp;
+                            
+                        
                     </div>
                 </div>
             </div>
-        </a>
-        
-        
-    </div>
-</div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="java新日志系统log4j2配置相关">java新日志系统log4j2配置相关</h1>
+<p>根据代码运行情况,目前得到的信息是如果使用java api提供的接口:</p>
+<pre><code class="language-LoggerFactory.getLogger()" data-lang="LoggerFactory.getLogger()"></code></pre><p>返回的log对象,是从全局的一个LoggerFactory中实例出来的对象,相应的配置信息会从全局的LoggerContext中获取(搭载使用log4j2日志系统).</p>
+<p>如果需要修改这些配置,则需要按照如下方式,先获取到全局的LoggerContext,然后使用相应的接口进行配置的rewrite.</p>
+<p>How do I reconfigure log4j2 in code with a specific configuration file?</p>
+<p>See the below example. Be aware that this LoggerContext class is not part of the public API so your code may break with any minor release.
+<a href="http://logging.apache.org/log4j/2.x/faq.html#reconfig_from_code">来源,官网FAQ</a></p>
+<pre><code>// import org.apache.logging.log4j.core.LoggerContext;
+ 
+LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+File file = new File(&quot;path/to/a/different/log4j2.xml&quot;);
+// this will force a reconfiguration
+context.setConfigLocation(file.toURI());
+</code></pre>
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2017-05-05</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="/post/2017-05-31-storm-configure/">
+                    Next<br>Storm 配置相关
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/post/2017-04-01-spark-storm-hadoop/">
+                    Previous<br>Spark Storm Hadoop
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
 
 
             </div>
+        </div>
+    </div>
+</div>
 
-
-<div id="single-column-footer">
+            </div><div id="single-column-footer">
 &lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
 Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>

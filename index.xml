@@ -5,19 +5,377 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Mar 2020 15:59:47 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     
         <item>
-        <title>My First Post</title>
-        <link>/posts/my-first-post/</link>
-        <pubDate>Mon, 23 Mar 2020 15:59:47 +0800</pubDate>
+        <title>MongoDB mapreduce 调试</title>
+        <link>/post/2017-06-16-mongodb-mapreduce/</link>
+        <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
         
-        <guid>/posts/my-first-post/</guid>
-        <description>My New Hugo Site /posts/my-first-post/ -- /posts/my-first-post/ - </description>
+        <guid>/post/2017-06-16-mongodb-mapreduce/</guid>
+        <description>My New Hugo Site /post/2017-06-16-mongodb-mapreduce/ -&lt;p&gt;#MongoDB
+相关函数用与调试方法。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var c = db.UIDs.findOne()
+
+var m = function(){
+	 print(this)
+	this.DS.forEach(function(z){
+		print(z.D,z.C);
+		emit(z.D,z.C);
+	});
+}
+
+var emit = function(key, value) {
+	print(&amp;quot;emit&amp;quot;);
+	print(&amp;quot;key: &amp;quot; + key + &amp;quot; value: &amp;quot; + tojson(value));
+}
+
+m.apply(c)//调试
+
+var r = function(key,values){return Array.sum(values);}
+
+db.UIDs.mapReduce(m,r,{limit:1000,out:&amp;quot;null&amp;quot;}).find()
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;引用自：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/yuechaotian/archive/2013/02/26/2933455.html&#34;&gt;跟踪调试&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/guoqianqian5812/article/details/52785557&#34;&gt; MongoDB mapReduce使用 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/qqiabc521/article/details/6330783&#34;&gt; MongoDB mapReduce使用 &lt;/a&gt;&lt;/p&gt;
+- /post/2017-06-16-mongodb-mapreduce/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>kafka 监控</title>
+        <link>/post/2017-06-01-kafka-offset-monitor/</link>
+        <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-06-01-kafka-offset-monitor/</guid>
+        <description>My New Hugo Site /post/2017-06-01-kafka-offset-monitor/ -&lt;h1 id=&#34;kafka监控工具&#34;&gt;kafka监控工具&lt;/h1&gt;
+&lt;p&gt;kafka-manager,配置复杂,功能强大&lt;/p&gt;
+&lt;p&gt;Kafka Offset Monitor,配置简单,图形界面监控详细日志读写情况与lag信息.但要使用最新版,官网链接的git项目已经不在更新,可使用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/Morningstar/kafka-offset-monitor&#34;&gt;Kafka Offset Monitor&lt;/a&gt;&lt;/p&gt;
+- /post/2017-06-01-kafka-offset-monitor/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Storm 配置相关</title>
+        <link>/post/2017-05-31-storm-configure/</link>
+        <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-05-31-storm-configure/</guid>
+        <description>My New Hugo Site /post/2017-05-31-storm-configure/ -&lt;h1 id=&#34;日志相关&#34;&gt;日志相关&lt;/h1&gt;
+&lt;p&gt;使用本地模式的时候,能够指定相应的配置文件来控制日志(log4j2)的输出情况.&lt;/p&gt;
+&lt;p&gt;但是使用集群模式,将jar文件上传到storm集群后,日志的配置文件将使用storm环境指定的日志配置文件,目前使用的是log4j2.存在于storm项目目录下的log4j2/worker.xml,如果想要控制日志输出,需要修改这个配置文件.&lt;/p&gt;
+&lt;p&gt;ps:如果配置文件出错,将导致日志无法输出,storm ui 页面无法统计单节点错误信息.需要在本地模式进行配置文件的调试.&lt;/p&gt;
+&lt;h1 id=&#34;内存占用&#34;&gt;内存占用&lt;/h1&gt;
+&lt;p&gt;首先理解storm中topology,bolt/sprot,worker,executor,task的关系.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/peak-c/p/6297794.html&#34;&gt;Storm 性能优化&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://storm.apache.org/releases/1.1.0/Understanding-the-parallelism-of-a-Storm-topology.html&#34;&gt;Understanding the Parallelism of a Storm Topology&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://storm.apache.org/releases/1.1.0/Concepts.html&#34;&gt;Concepts&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后,默认情况下,storm集群给一个worker分配64(日志使用)+768M的内存空间,如果需要修改,则可以在配置文件(conf/storm.yaml)中,增加配置项:worker.heap.memory.mb: 1984(不包含日志的64M).但要注意的是,最好是集群中所有的storm节点都进行配置,因为这个配置项(或许可以扩展到全部配置项),默认会使用leader节点的信息,如果当前的storm节点不是leader(storm ui中查看),修改不会起作用.&lt;/p&gt;
+- /post/2017-05-31-storm-configure/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Java log4j2 配置相关</title>
+        <link>/post/2017-05-05-java-log4j2-configure/</link>
+        <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-05-05-java-log4j2-configure/</guid>
+        <description>My New Hugo Site /post/2017-05-05-java-log4j2-configure/ -&lt;h1 id=&#34;java新日志系统log4j2配置相关&#34;&gt;java新日志系统log4j2配置相关&lt;/h1&gt;
+&lt;p&gt;根据代码运行情况,目前得到的信息是如果使用java api提供的接口:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-LoggerFactory.getLogger()&#34; data-lang=&#34;LoggerFactory.getLogger()&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的log对象,是从全局的一个LoggerFactory中实例出来的对象,相应的配置信息会从全局的LoggerContext中获取(搭载使用log4j2日志系统).&lt;/p&gt;
+&lt;p&gt;如果需要修改这些配置,则需要按照如下方式,先获取到全局的LoggerContext,然后使用相应的接口进行配置的rewrite.&lt;/p&gt;
+&lt;p&gt;How do I reconfigure log4j2 in code with a specific configuration file?&lt;/p&gt;
+&lt;p&gt;See the below example. Be aware that this LoggerContext class is not part of the public API so your code may break with any minor release.
+&lt;a href=&#34;http://logging.apache.org/log4j/2.x/faq.html#reconfig_from_code&#34;&gt;来源,官网FAQ&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// import org.apache.logging.log4j.core.LoggerContext;
+ 
+LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+File file = new File(&amp;quot;path/to/a/different/log4j2.xml&amp;quot;);
+// this will force a reconfiguration
+context.setConfigLocation(file.toURI());
+&lt;/code&gt;&lt;/pre&gt;- /post/2017-05-05-java-log4j2-configure/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Spark Storm Hadoop</title>
+        <link>/post/2017-04-01-spark-storm-hadoop/</link>
+        <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-04-01-spark-storm-hadoop/</guid>
+        <description>My New Hugo Site /post/2017-04-01-spark-storm-hadoop/ -&lt;h1 id=&#34;hadoop-vs-storm&#34;&gt;Hadoop vs Storm&lt;/h1&gt;
+&lt;p&gt;以下内容&lt;a href=&#34;http://www.oschina.net/news/73939/hadoop-spark-%20difference&#34;&gt;&lt;code&gt;摘录自&lt;/code&gt;&lt;/a&gt;：&lt;/p&gt;
+&lt;p&gt;Hadoop实质上更多是一个分布式数据基础设施: 它将巨大的数据集分派到一个由普通计算机组成的集群中的多个节点进行存储。Hadoop还会索引和跟踪这些数据，让大数据处理和分析效率达到前所未有的高度。
+Spark，则是那么一个专门用来对那些分布式存储的大数据进行处理的工具，它并不会进行分布式数据的存储。&lt;/p&gt;
+&lt;p&gt;相反，Spark也不是非要依附在Hadoop身上才能生存，但它没有提供文件管理系统。所以，它必须和其他的分布式文件系统进行集成才能运作。这里我们可以选择Hadoop的HDFS,也可以选择其他的基于云的数据系统平台。但Spark默认来说还是被用在Hadoop上面的，毕竟，大家都认为它们的结合是最好的。&lt;/p&gt;
+&lt;p&gt;MapReduce是分步对数据进行处理的: ”从集群中读取数据，进行一次处理，将结果写到集群，从集群中读取更新后的数据，进行下一次的处理，将结果写到集群，等等…“ Booz Allen Hamilton的数据科学家Kirk Borne如此解析。&lt;/p&gt;
+&lt;p&gt;反观Spark，它会在内存中以接近“实时”的时间完成所有的数据分析：“从集群中读取数据，完成所有必须的分析处理，将结果写回集群，完成，” Born说道。Spark的批处理速度比MapReduce快近10倍，内存中的数据分析速度则快近100倍。&lt;/p&gt;
+&lt;p&gt;如果需要处理的数据和结果需求大部分情况下是静态的，且你也有耐心等待批处理的完成的话，MapReduce的处理方式也是完全可以接受的。
+但如果你需要对流数据进行分析，比如那些来自于工厂的传感器收集回来的数据，又或者说你的应用是需要多重数据处理的，那么你也许更应该使用Spark进行处理。
+大部分机器学习算法都是需要多重数据处理的。此外，通常会用到Spark的应用场景有以下方面：实时的市场活动，在线产品推荐，网络安全分析，机器日记监控等。&lt;/p&gt;
+&lt;h1 id=&#34;spark&#34;&gt;Spark&lt;/h1&gt;
+&lt;p&gt;有待补充&lt;/p&gt;
+- /post/2017-04-01-spark-storm-hadoop/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Linux shell使用</title>
+        <link>/post/2017-03-31-linux-shell-usage/</link>
+        <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-03-31-linux-shell-usage/</guid>
+        <description>My New Hugo Site /post/2017-03-31-linux-shell-usage/ -&lt;p&gt;Linux常用命令收集&lt;/p&gt;
+&lt;h1 id=&#34;find结合grep搜索内容&#34;&gt;find结合grep搜索内容&lt;/h1&gt;
+&lt;h2 id=&#34;一find命令&#34;&gt;一：find命令&lt;/h2&gt;
+&lt;p&gt;find命令用于：在一个目录（及子目录）中搜索文件，你可以指定一些匹配条件，如按文件名、文件类型、用户甚至是时间戳查找文件。下面就通过实例来体验下find命令的强大。&lt;/p&gt;
+&lt;h3 id=&#34;find命令的一般形式&#34;&gt;find命令的一般形式&lt;/h3&gt;
+&lt;h4 id=&#34;1常用find命令的常用形式可以简化为&#34;&gt;1.常用find命令的常用形式可以简化为：&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;find [path...] [expression]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;path：find命令所查找的目录路径。例如用.来表示当前目录，用/来表示系统根目录&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;expression：expression可以分为——“-options [-print -exec -ok &amp;hellip;]”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;-exec&lt;/code&gt;，find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为&amp;rsquo;command&amp;rsquo; {  } ;，注意{   }和\；之间的空格。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find ./ -size &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; -exec rm &lt;span style=&#34;color:#f92672&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;删除文件大小为零的文件 ：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rm -i &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;find ./ -size 0&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; 
+find ./ -size &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; | xargs rm -f &amp;amp; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;为了用ls -l命令列出所匹配到的文件，可以把ls -l命令放在find命令的-exec选项中：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find . -type f -exec ls -l &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;在/logs目录中查找更改时间在5日以前的文件并删除它们：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /logs -type f -mtime +5 -exec rm &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;-ok，和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，在执行每一个命令之前，都会给出提示，让用户来确定是否执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.conf&amp;#34;&lt;/span&gt;  -mtime +5 -ok rm &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt; 
+&lt;span style=&#34;color:#75715e&#34;&gt;#在当前目录中查找所有文件名以.LOG结尾、更改时间在5日以上的文件，并删除它们，只不过在删除之前先给出提示。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;2-也有人这样总结find命令的结构&#34;&gt;2. 也有人这样总结find命令的结构：&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find start_directory test 
+     options 
+     criteria_to_match 
+     action_to_perform_on_results
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;find命令的常用选项及实例&#34;&gt;find命令的常用选项及实例&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;-name: 按照文件名查找文件。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /dir -name filename  在/dir目录及其子目录下面查找名字为filename的文件
+find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.c&amp;#34;&lt;/span&gt; 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-perm: 按照文件权限来查找文件。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find . -perm &lt;span style=&#34;color:#ae81ff&#34;&gt;755&lt;/span&gt; –print 在当前目录下查找文件权限位为755的文件，即文件属主可以读、写、执行，其他用户可以读、执行的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-prune: 使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /apps -path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/apps/bin&amp;#34;&lt;/span&gt; -prune -o –print 在/apps目录下查找文件，但不希望在
+/apps/bin目录下查找
+find /usr/sam -path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/usr/sam/dir1&amp;#34;&lt;/span&gt; -prune -o –print 在/usr/sam目录下查找不在dir1子目录之内的所有文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-user:按照文件属主来查找文件。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find ~ -user sam –print 在$HOME目录中查找文件属主为sam的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-group:按照文件所属的组来查找文件。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /apps -group gem –print 在/apps目录下查找属于gem用户组的文件 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-mtime -n +n:按照文件的更改时间来查找文件， -n表示文件更改时间距现在n天以内，+n表示文件更改时间距现在n天以前。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find / -mtime -5 –print 在系统根目录下查找更改时间在5日以内的文件
+find /var/adm -mtime +3 –print 在/var/adm目录下查找更改时间在3日以前的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-nogroup:查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find / –nogroup -print
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-nouser:查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /home -nouser –print
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-newer file1 ! file2 : 查找更改时间比文件file1新但比文件file2旧的文件。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-type:查找某一类型的文件&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;例如：
+b - 块设备文件。
+d - 目录。
+c - 字符设备文件。
+p - 管道文件。
+l - 符号链接文件。
+f - 普通文件。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find /etc -type d –print 在/etc目录下查找所有的目录
+find . ! -type d –print 在当前目录下查找除目录以外的所有类型的文件
+find /etc -type l –print 在/etc目录下查找所有的符号链接文件
+-size n：&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 查找文件长度为n块的文件，带有c时表示文件长度以字节计。
+find . -size +1000000c –print 在当前目录下查找文件长度大于1 M字节的文件
+find /home/apache -size 100c –print 在/home/apache目录下查找文件长度恰好为100字节的文件
+find . -size +10 –print 在当前目录下查找长度超过10块的文件（一块等于512字节）
+-depth：在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找。
+find / -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CON.FILE&amp;#34;&lt;/span&gt; -depth –print 它将首先匹配所有的文件然后再进入子目录中查找 
+-mount：在查找文件时不跨越文件系统mount点。 
+find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*.XC&amp;#34;&lt;/span&gt; -mount –print 从当前目录开始查找位于本文件系统中文件名以XC结尾的文件（不进入其他文件系统）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-follow：如果find命令遇到符号链接文件，就跟踪至链接所指向的文件。&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二find与xargs&#34;&gt;二：find与xargs&lt;/h2&gt;
+&lt;p&gt;在使用find命令的-exec选项处理匹配到的文件时， find命令将所有匹配到的文件一起传递给exec执行。但有些系统对能够传递给exec的命令长度有限制，这样在find命令运行几分钟之后，就会出现溢出错误。错误信息通常是“参数列太长”或“参数列溢出”。这就是xargs命令的用处所在，特别是与find命令一起使用。&lt;/p&gt;
+&lt;p&gt;find命令把匹配到的文件传递给xargs命令，而xargs命令每次只获取一部分文件而不是全部，不像-exec选项那样。这样它可以先处理最先获取的一部分文件，然后是下一批，并如此继续下去。&lt;/p&gt;
+&lt;p&gt;在有些系统中，使用-exec选项会为处理每一个匹配到的文件而发起一个相应的进程，并非将匹配到的文件全部作为参数一次执行；这样在有些情况下就会出现进程过多，系统性能下降的问题，因而效率不高；&lt;/p&gt;
+&lt;p&gt;而使用xargs命令则只有一个进程。另外，在使用xargs命令时，究竟是一次获取所有的参数，还是分批取得参数，以及每一次获取参数的数目都会根据该命令的选项及系统内核中相应的可调参数来确定。&lt;/p&gt;
+&lt;p&gt;来看看xargs命令是如何同find命令一起使用的，并给出一些例子：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;find . -type f -print | xargs file 查找系统中的每一个普通文件，然后使用xargs命令来测试它们分别属于哪类文件
+
+
+find / -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;core&amp;#34;&lt;/span&gt; -print | xargs echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &amp;gt;/tmp/core.log 在整个系统中查找内存信息转储文件&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;core dump&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; ，然后把结果保存到/tmp/core.log 文件中：
+
+find . -type f -print | xargs grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt; 用grep命令在所有的普通文件中搜索hostname这个词
+
+find ./ -mtime +3 -print|xargs rm -f –r 删除3天以前的所有东西 （find . -ctime +3 -exec rm -rf &lt;span style=&#34;color:#f92672&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\;&lt;/span&gt;）
+
+find ./ -size &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; | xargs rm -f &amp;amp; 删除文件大小为零的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;find命令配合使用exec和xargs可以使用户对所匹配到的文件执行几乎所有的命令。&lt;/p&gt;
+&lt;h1 id=&#34;grep命令&#34;&gt;grep命令&lt;/h1&gt;
+&lt;p&gt;grep (global search regular expression(RE) and print out the line,全面搜索正则表达式并把行打印出来)是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。&lt;/p&gt;
+&lt;h2 id=&#34;一grep命令的一般选项及实例&#34;&gt;一：grep命令的一般选项及实例&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;grep &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; PATTERN &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;FILE...&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+grep &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;-e PATTERN | -f FILE&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;FILE...&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;grep命令用于搜索由Pattern参数指定的模式，并将每个匹配的行写入标准输出中。这些模式是具有限定的正则表达式，它们使用ed或egrep命令样式。如果在File参数中指定了多个名称，grep命令将显示包含匹配行的文件的名称。对 shell 有特殊含义的字符 ($, *, [, |, ^, (, ), \ ) 出现在 Pattern参数中时必须带双引号。如果 Pattern参数不是简单字符串，通常必须用单引号将整个模式括起来。在诸如 [a-z], 之类的表达式中，-（减号）cml 可根据当前正在整理的序列来指定一个范围。整理序列可以定义等价的类以供在字符范围中使用。如果未指定任何文件，grep会假定为标准输入。&lt;/p&gt;
+&lt;h2 id=&#34;正则表达式grep正则表达式元字符集基本集&#34;&gt;正则表达式，grep正则表达式元字符集(基本集)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;^&lt;/code&gt;：锚定行的开始 如：&amp;lsquo;^grep&#39;匹配所有以grep开头的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$&lt;/code&gt;：锚定行的结束 如：&amp;lsquo;grep$&#39;匹配所有以grep结尾的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt;：匹配一个非换行符的字符 如：&amp;lsquo;gr.p&#39;匹配gr后接一个任意字符，然后是p。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt;：匹配零个或多个先前字符 如：&amp;rsquo; *grep&#39;匹配所有一个或多个空格后紧跟grep的行。 .*一起用代表任意字符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;[]&lt;/code&gt;:匹配一个指定范围内的字符，如&amp;rsquo;[Gg]rep&#39;匹配Grep和grep。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;[^]&lt;/code&gt;:匹配一个不在指定范围内的字符，如：&#39;[^A-FH-Z]rep&#39;匹配不包含A-F和H-Z的一个字母开头，紧跟rep的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;\(..\)&lt;/code&gt;:标记匹配字符，如：&#39;(love)&#39;，love被标记为1。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;\&amp;lt;&lt;/code&gt;:锚定单词的开始，如：&#39;&amp;lt;grep&#39;匹配包含以grep开头的单词的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;\&amp;gt;&lt;/code&gt;:锚定单词的结束，如&amp;rsquo;grep&amp;gt;&#39;匹配包含以grep结尾的单词的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;x\{m\}&lt;/code&gt;:连续重复字符x，m次，如：&amp;lsquo;o{5}&amp;lsquo;匹配包含连续5个o的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;x\{m,\}&lt;/code&gt;: 连续重复字符x,至少m次，如：&amp;lsquo;o{5,}&amp;lsquo;匹配至少连续有5个o的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;x\{m,n\}&lt;/code&gt;: 连续重复字符x，至少m次，不多于n次，如：&amp;lsquo;o{5,10}&amp;lsquo;匹配连续5&amp;ndash;10个o的行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;\w&lt;/code&gt;:  匹配一个文字和数字字符，也就是[A-Za-z0-9]，如：&amp;lsquo;G\w*p&#39;匹配以G后跟零个或多个文字或数字字符，然后是p。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;\W&lt;/code&gt;:  w的反置形式，匹配一个非单词字符，如点号句号等。\W*则可匹配多个。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;`\b1:  单词锁定符，如: &amp;lsquo;\bgrep\b&#39;只匹配grep，即只能是grep这个单词，两边均为空格。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;grep命令的常用选项及实例&#34;&gt;grep命令的常用选项及实例&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;-?&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;同时显示匹配行上下的？行，如：grep -2 pattern filename同时显示匹配行的上下2行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-b，--byte-offset&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打印匹配行前面打印该行所在的块号码。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-c,--count&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;只打印匹配的行数，不显示匹配的内容。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-f File，--file=File&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;从文件中提取模板。空文件中包含0个模板，所以什么都不匹配。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-h，--no-filename&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当搜索多个文件时，不显示匹配文件名前缀。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-i，--ignore-case&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;忽略大小写差别。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-q，--quiet&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;取消显示，只返回退出状态。0则表示找到了匹配的行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-l，--files-with-matches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打印匹配模板的文件清单。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-L，--files-without-match&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打印不匹配模板的文件清单。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-n，--line-number&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在匹配的行前面打印行号。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-s，--silent&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;不显示关于不存在或者无法读取文件的错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-v，--revert-match&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;反检索，只显示不匹配的行。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-w，--word-regexp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果被&amp;lt;和&amp;gt;引用，就把表达式做为一个单词搜索。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-V，--version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;显示软件版本信息。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;示例：
+
+ls -l | grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;^a&amp;#39;&lt;/span&gt; 通过管道过滤ls -l输出的内容，只显示以a开头的行。
+
+grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt; d* 显示所有以d开头的文件中包含test的行。
+
+grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt; aa bb cc 显示在aa，bb，cc文件中匹配test的行。
+
+grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;[a-z]&amp;#39;&lt;/span&gt; aa 显示所有包含每个字符串至少有5个连续小写字符的字符串的行。
+
+grep &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w(es)t.*&amp;#39;&lt;/span&gt; aa 如果west被匹配，则es就被存储到内存中，并标记为1，然后搜索任意个字符&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;.*&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;，这些字符后面紧跟着另外一个es&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;，找到就显示该行。如果用egrep或grep -E，就不用&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;号进行转义，直接写成&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w(es)t.*&amp;#39;&lt;/span&gt;就可以了。
+
+grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写
+
+grep -l pattern files ：只列出匹配的文件名，
+
+grep -L pattern files ：列出不匹配的文件名，
+
+grep -w pattern files ：只匹配整个单词，而不是字符串的一部分&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;如匹配‘magic’，而不是‘magical’&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;，
+
+grep -C number pattern files ：匹配的上下文分别显示&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;number&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;行，
+
+grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，
+
+grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- /post/2017-03-31-linux-shell-usage/ - </description>
+        </item>
+    
+    
+    
+        <item>
+        <title>多种代理服务理解</title>
+        <link>/post/2017-03-23-proxy-type/</link>
+        <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
+        
+        <guid>/post/2017-03-23-proxy-type/</guid>
+        <description>My New Hugo Site /post/2017-03-23-proxy-type/ -&lt;h1 id=&#34;代理服务器类型&#34;&gt;代理服务器类型&lt;/h1&gt;
+&lt;p&gt;代理服务器的个人总结。&lt;/p&gt;
+&lt;h2 id=&#34;正向代理&#34;&gt;正向代理&lt;/h2&gt;
+&lt;p&gt;你不想出门，让朋友帮你带一份麦当劳的巨无霸。
+你是客户端，你的朋友是正向代理服务器，麦当劳是目的服务器，巨无霸是目的资源。
+你不能直接去麦当劳买东西（客户端无法直接访问目的资源），告诉朋友你需要麦当劳的巨无霸（告诉代理服务器某个地址上的某个资源），让他带回来（代理代替客户端发出请求获取数据，并发给客户端）。
+有如下特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问本来无法访问的资源。&lt;/li&gt;
+&lt;li&gt;资源加速（缓存与链路加速）。&lt;/li&gt;
+&lt;li&gt;访问控制。&lt;/li&gt;
+&lt;li&gt;隐藏真实客户端。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;代表&#34;&gt;代表：&lt;/h3&gt;
+&lt;p&gt;squid，各种翻墙&lt;/p&gt;
+&lt;h2 id=&#34;反向代理&#34;&gt;反向代理&lt;/h2&gt;
+&lt;p&gt;打电话让室友帮你带午餐，室友会根据情况帮你带炒饭或者米粉。
+你是客户端，你的朋友是反向代理服务器，午餐是资源。你朋友能根据情况做出选择（反向代理策略），某家人少出餐快（负载均衡）；不能吃辣（访问控制）；饭店地址保密（保护真正的服务器）。&lt;/p&gt;
+&lt;h3 id=&#34;代表-1&#34;&gt;代表：&lt;/h3&gt;
+&lt;p&gt;nginx&lt;/p&gt;
+&lt;h2 id=&#34;透明代理&#34;&gt;透明代理&lt;/h2&gt;
+&lt;p&gt;行为管理设备大部分为透明代理。&lt;/p&gt;
+&lt;h2 id=&#34;匿名代理&#34;&gt;匿名代理&lt;/h2&gt;
+&lt;p&gt;加密的透明代理&lt;/p&gt;- /post/2017-03-23-proxy-type/ - </description>
         </item>
     
     

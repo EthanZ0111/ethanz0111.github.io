@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MongoDB on My New Hugo Site</title>
+    <link>/tags/mongodb/</link>
+    <description>Recent content in MongoDB on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MongoDB mapreduce 调试</title>
+      <link>/post/2017-06-16-mongodb-mapreduce/</link>
+      <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-06-16-mongodb-mapreduce/</guid>
+      <description>#MongoDB 相关函数用与调试方法。
+var c = db.UIDs.findOne() var m = function(){ print(this) this.DS.forEach(function(z){ print(z.D,z.C); emit(z.D,z.C); }); } var emit = function(key, value) { print(&amp;quot;emit&amp;quot;); print(&amp;quot;key: &amp;quot; + key + &amp;quot; value: &amp;quot; + tojson(value)); } m.apply(c)//调试 var r = function(key,values){return Array.sum(values);} db.UIDs.mapReduce(m,r,{limit:1000,out:&amp;quot;null&amp;quot;}).find() 引用自：
+跟踪调试
+MongoDB mapReduce使用 
+MongoDB mapReduce使用</description>
+    </item>
+    
+  </channel>
+</rss>

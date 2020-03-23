@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html><head>
+<title>Storm 配置相关</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="/scss/journal.min.e24eaf7258cd3904fb5e711d29b8f80978e7b6fe0c6096c8c529c0c3b28d3fda.css" integrity="sha256-4k6vcljNOQT7XnEdKbj4CXjntv4MYJbIxSnAw7KNP9o=" media="screen">
+
+<script src="/js/loadCSS.js"></script>
+<script src="/js/table.js"></script>
+
+
+<script src="/js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="">
+    
+        <div class="nav-title">
+            My New Hugo Site
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+&lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+-->
+
+&copy;
+	
+	2017 My New Hugo Site
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%97%a5%e5%bf%97%e7%9b%b8%e5%85%b3" v-on:click="closeDrawer" id="日志相关-nav">
+										 日志相关
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%86%85%e5%ad%98%e5%8d%a0%e7%94%a8" v-on:click="closeDrawer" id="内存占用-nav">
+										 内存占用
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%97%a5%e5%bf%97%e7%9b%b8%e5%85%b3" v-on:click="closeDrawer" id="日志相关-nav">
+										 日志相关
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%86%85%e5%ad%98%e5%8d%a0%e7%94%a8" v-on:click="closeDrawer" id="内存占用-nav">
+										 内存占用
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="">
+            My New Hugo Site
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="">
+        <div class="single-column-header-title">My New Hugo Site</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('/')">
+                <div class="post-title">
+                    Storm 配置相关
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2017-05-31 00:00
+                        </time>
+                        
+
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/java">Java</a>
+                                &nbsp;
+                            
+                                <a href="/tags/storm">Storm</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="日志相关">日志相关</h1>
+<p>使用本地模式的时候,能够指定相应的配置文件来控制日志(log4j2)的输出情况.</p>
+<p>但是使用集群模式,将jar文件上传到storm集群后,日志的配置文件将使用storm环境指定的日志配置文件,目前使用的是log4j2.存在于storm项目目录下的log4j2/worker.xml,如果想要控制日志输出,需要修改这个配置文件.</p>
+<p>ps:如果配置文件出错,将导致日志无法输出,storm ui 页面无法统计单节点错误信息.需要在本地模式进行配置文件的调试.</p>
+<h1 id="内存占用">内存占用</h1>
+<p>首先理解storm中topology,bolt/sprot,worker,executor,task的关系.</p>
+<p><a href="http://www.cnblogs.com/peak-c/p/6297794.html">Storm 性能优化</a></p>
+<p><a href="http://storm.apache.org/releases/1.1.0/Understanding-the-parallelism-of-a-Storm-topology.html">Understanding the Parallelism of a Storm Topology</a></p>
+<p><a href="http://storm.apache.org/releases/1.1.0/Concepts.html">Concepts</a></p>
+<p>然后,默认情况下,storm集群给一个worker分配64(日志使用)+768M的内存空间,如果需要修改,则可以在配置文件(conf/storm.yaml)中,增加配置项:worker.heap.memory.mb: 1984(不包含日志的64M).但要注意的是,最好是集群中所有的storm节点都进行配置,因为这个配置项(或许可以扩展到全部配置项),默认会使用leader节点的信息,如果当前的storm节点不是leader(storm ui中查看),修改不会起作用.</p>
+
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2017-05-31</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="/post/2017-06-01-kafka-offset-monitor/">
+                    Next<br>kafka 监控
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/post/2017-05-05-java-log4j2-configure/">
+                    Previous<br>Java log4j2 配置相关
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+&lt;! -- Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+-->
+
+&copy;
+	
+	2017 My New Hugo Site
+	
+</div>
+    	</div>
+    <script src="/js/journal.js"></script>
+    </body>
+</html>

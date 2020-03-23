@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kafka on My New Hugo Site</title>
+    <link>/tags/kafka/</link>
+    <description>Recent content in kafka on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>kafka 监控</title>
+      <link>/post/2017-06-01-kafka-offset-monitor/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-06-01-kafka-offset-monitor/</guid>
+      <description>kafka监控工具 kafka-manager,配置复杂,功能强大
+Kafka Offset Monitor,配置简单,图形界面监控详细日志读写情况与lag信息.但要使用最新版,官网链接的git项目已经不在更新,可使用
+Kafka Offset Monitor</description>
+    </item>
+    
+  </channel>
+</rss>

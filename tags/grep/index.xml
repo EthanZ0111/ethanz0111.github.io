@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>grep on My New Hugo Site</title>
+    <link>/tags/grep/</link>
+    <description>Recent content in grep on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/grep/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux shell使用</title>
+      <link>/post/2017-03-31-linux-shell-usage/</link>
+      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-31-linux-shell-usage/</guid>
+      <description>&lt;p&gt;Linux常用命令收集&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
